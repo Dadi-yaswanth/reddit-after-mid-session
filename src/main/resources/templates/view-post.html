@@ -240,8 +240,6 @@
                                 <div class="add-reply">
                                     <div class="create-comment">
                                         <div class="commenter-div">
-                                            <p>Commenting as <a href="">sham_yash</a></p>
-
                                         </div>
                                         <form action=""
                                               th:action="@{'/'+${postData.isCommunity ? 'r/' + postData.getCommunity().getCommunityName() : 'u/' + postData.getUser().getUsername()}+ '/comments/' + ${postData.getPostId()} +'/reply/'+ ${comment.getCommentId()}}"
