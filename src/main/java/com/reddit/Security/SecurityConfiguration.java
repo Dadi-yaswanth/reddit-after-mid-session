@@ -28,7 +28,9 @@ public class SecurityConfiguration {
                     "/search/**",
                     "/{type}/{username}/comments/{id}",
                     "/view-community/**",
-                    "/view-profile"
+                    "/view-profile",
+                    "/images/**",
+                    "/uploads/**"
             };
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

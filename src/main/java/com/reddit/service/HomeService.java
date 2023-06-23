@@ -25,10 +25,6 @@ public class HomeService {
     private final CommunityRepository communityRepository;
     private final UserRepository userRepository;
 
-    public void homePagePostsLogin(int pageNumber, int pageSize) {
-
-    }
-
     public Page<Post> homePagePostsGeneral(int pageNumber, int size) {
         Pageable page = PageRequest.of(pageNumber - 1, size, Sort.by(Sort.Direction.DESC, "publishedAt"));
         Page<Post> postsOrderByPublishedAt = postRepository.findPostsOrderByPublishedAt(page);
@@ -38,7 +34,7 @@ public class HomeService {
     public Page<Post> homePagePostsLoggedIn(int pageNumber, int size,User user){
         Set<Community> communityMembers = user.getCommunityMembers();
 
-        if(communityMembers == null || communityMembers.size() == 0 )
+        if(communityMembers == null || communityMembers.size() <2 )
             return homePagePostsGeneral(pageNumber,size);
 
         List<Long> followingCommunities = new ArrayList<>();

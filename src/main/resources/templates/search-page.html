@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -11,7 +12,7 @@
 <main>
     <header id="pageHeader">
         <div id="header-logo">
-            <a href="">
+            <a href="/home">
                 <img th:src="@{/images/Reddit-logo.png}" alt="logo" class="header-img"/>
             </a>
         </div>
@@ -30,7 +31,7 @@
                 />
             </form>
         </div>
-        <div id="header-options">
+        <div id="header-options" sec:authorize="isAnonymous()">
             <a href="" class="login">Login</a>
             <a href="" class="register">Register</a>
         </div>

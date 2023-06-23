@@ -12,7 +12,7 @@
 
     <header id="pageHeader">
         <div id="header-logo">
-            <a href="">
+            <a href="/home">
                 <img th:src="@{/images/Reddit-logo.png}" alt="logo" class="header-img"/>
             </a>
         </div>
@@ -31,11 +31,11 @@
             </form>
         </div>
         <div id="header-options">es
-            <a href="">
+            <a href="/home">
                 <img th:src="@{/images/popular.png}" alt="home" class=".header-options-img"/>
             </a>
 
-            <a href="">
+            <a href="/notification-page">
                 <img th:src="@{/images/notify.png}" alt="home"/>
             </a>
 
@@ -43,7 +43,7 @@
                 <img th:src="@{/images/message.png}" alt="home"/>
             </a>
 
-            <a href="">
+            <a href="/new-post">
                 <img th:src="@{/images/plus.png}" alt="home"/>
             </a>
         </div>
@@ -55,12 +55,12 @@
 
             <div id="header-profile-details">
                 <div id="username-div">
-                    <p>sham_yaswanth</p>
+                    <p th:text="${postData.getUser().getUsername()}"></p>
                 </div>
 
                 <div id="karma-div">
                     <img th:src="@{/images/karma-star.png}" alt="star"/>
-                    <p>100786 karma</p>
+                    <p th:text="${postData.getUser().getKarma()}"></p>
                 </div>
             </div>
         </div>
