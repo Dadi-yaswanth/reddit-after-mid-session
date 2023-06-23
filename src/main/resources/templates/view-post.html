@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -30,7 +31,7 @@
                 />
             </form>
         </div>
-        <div id="header-options">es
+        <div id="header-options">
             <a href="/home">
                 <img th:src="@{/images/popular.png}" alt="home" class=".header-options-img"/>
             </a>
@@ -48,19 +49,19 @@
             </a>
         </div>
 
-        <div id="header-profile">
+        <div id="header-profile" sec:authorize="isAuthenticated()" >
             <div id="header-profile-pic">
                 <img th:src="@{/images/dp.png}" alt="picture"/>
             </div>
 
             <div id="header-profile-details">
                 <div id="username-div">
-                    <p th:text="${postData.getUser().getUsername()}"></p>
+                    <p th:text="${loggedUserData.getUsername()}"></p>
                 </div>
 
                 <div id="karma-div">
                     <img th:src="@{/images/karma-star.png}" alt="star"/>
-                    <p th:text="${postData.getUser().getKarma()}"></p>
+                    <p th:text="${loggedUserData.getKarma()}"></p>
                 </div>
             </div>
         </div>

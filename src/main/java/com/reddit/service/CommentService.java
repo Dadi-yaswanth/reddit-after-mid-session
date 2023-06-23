@@ -12,6 +12,7 @@ import com.reddit.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 
 @Service
@@ -21,9 +22,9 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
 
-    public void addComment(Long postId, CommentDto commentDto){
+    public void addComment(Long postId, CommentDto commentDto, Principal principal){
         //find user using authorize later
-        User user = userRepository.findById(1L).orElseThrow(); //have to replace it with authorization user
+        User user = userRepository.findByUsernameIgnoreCase(principal.getName()).orElseThrow(); //have to replace it with authorization user
         Post post = postRepository.findById(postId).orElseThrow();
 
         List<Comment> postComments = post.getComments();
@@ -39,8 +40,8 @@ public class CommentService {
         System.out.println("yoo");
     }
 
-    public void addReply(Long commentId,CommentDto commentDto){
-        User user = userRepository.findById(1L).orElseThrow(); //have to replace it with authorization user
+    public void addReply(Long commentId,CommentDto commentDto, Principal principal){
+        User user = userRepository.findByUsernameIgnoreCase(principal.getName()).orElseThrow();
         Comment comment = commentRepository.findById(commentId).orElseThrow();
         System.out.println(comment.getCommentId());
         List<Reply> commentReplies = comment.getReplyComments();

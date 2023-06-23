@@ -2,6 +2,7 @@ package com.reddit.controller;
 
 import com.reddit.dto.CommentDto;
 import com.reddit.entity.Draft;
+import com.reddit.repository.UserRepository;
 import com.reddit.service.CommunityService;
 import com.reddit.service.DraftService;
 import com.reddit.service.FileService;
@@ -36,6 +37,8 @@ public class PostController {
     DraftService draftService;
     @Autowired
     CommunityService communityService;
+    @Autowired
+    UserRepository userRepository;
 
     @Value("${project.image}")
     private String path;
@@ -107,9 +110,12 @@ public class PostController {
     public String viewPost(@PathVariable Long postId,
                            @PathVariable String typeOfAccount,
                            @PathVariable String username,
-                           Model model) {
+                           Model model, Principal principal) {
         model.addAttribute("postData", postService.getPostByType(typeOfAccount, username, postId));
         model.addAttribute("commentDto", new CommentDto());
+        if(principal != null) {
+            model.addAttribute("loggedUserData", userRepository.findByUsernameIgnoreCase(principal.getName()).get());
+        }
         return "view-post";
     }
 }
