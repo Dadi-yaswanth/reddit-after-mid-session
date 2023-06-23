@@ -25,14 +25,17 @@ public class SecurityConfiguration {
                     "/login",
                     "/newRegister",
                     "/addUser",
-                    "/search/**"
+                    "/search/**",
+                    "/{type}/{username}/comments/{id}",
+                    "/view-community/**",
+                    "/view-profile"
             };
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(request ->
                         request
                                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                                .requestMatchers("/**").permitAll()
+                                .requestMatchers(ALLOWED_PATHS).permitAll()
                                 .anyRequest().authenticated()
                 ).userDetailsService(userDetailServiceJPA)
                 .csrf(AbstractHttpConfigurer::disable)

@@ -81,7 +81,7 @@ public class PostController {
         } else if (postDraft != null && postDraft.equals("Post")) {
             postService.saveDraftedPost(title, content, draftId, url,principal,communityName);
             draftService.deleteDraftById(draftId);
-            return "file-response";
+            return "redirect:/home";
         } else if (draftId != null) {
             draftController.updateDraft(draftId, title, content,principal);
             return "redirect:/draft";
@@ -93,7 +93,7 @@ public class PostController {
         } else{
             postService.post(title,images,url,content,principal,communityName,path);
         }
-        return "redirect;/home";
+        return "redirect:/home";
     }
 
     @GetMapping("/media/{filename:.+}")

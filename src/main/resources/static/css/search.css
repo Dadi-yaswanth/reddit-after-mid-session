@@ -10,7 +10,7 @@ main {
     "header header "
     "nav article ";
 
-    grid-template-rows: 5.4% 1fr;
+    grid-template-rows: 6.5% 1fr;
     grid-template-columns: 0 1fr;
     grid-row-gap: 0;
     grid-column-gap: 0;
@@ -88,17 +88,17 @@ article {
 }
 #home-search form input {
     display: flex;
-    align-items: center;
     /* border: 2px solid black; */
-    padding: 0.8rem;
+    padding: 0.6rem;
+    /* padding: 0.8rem 0.7rem; */
 }
 .search-bar {
-    width: 800px;
+    width: 30rem;
     height: 100%;
     background-color: #ebeced;
     border: none;
     border-radius: 1.2rem;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     padding-left: 2rem;
     margin-right: 2rem;
 }
@@ -221,7 +221,9 @@ article {
 .option-name:hover {
     background-color: #f1f0f0;
 }
-
+.option-active {
+    background-color: #f1f0f0;
+}
 #results {
     width: 100%;
     min-height: 0rem;
@@ -278,7 +280,6 @@ article {
 
 .community-result {
     display: flex;
-    justify-content: space-between;
 }
 
 .community-join {
