@@ -35,5 +35,5 @@ public interface PostRepository extends JpaRepository<Post,Long> {
     Page<Post> findPostsBySearchOrderByPublishedAt(@Param("word") String keyword,Pageable pageable);
 
     @Query("SELECT p FROM Post p JOIN p.community c WHERE c.communityName ILIKE :name ")
-    Page<Post> findCommunityPostsOrderByPublishedAt(String communityName,Pageable page);
+    Page<Post> findCommunityPostsOrderByPublishedAt(@Param("name") String communityName,Pageable page);
 }
