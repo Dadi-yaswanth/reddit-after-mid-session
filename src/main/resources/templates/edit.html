@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+      body {
+        background-color: rgb(219, 219, 219);
+      }
+      .post {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+      }
+      .postheader {
+        padding-top: 34px;
+      }
+      .box {
+        padding-top: 55px;
+      }
+      a {
+        font-size: 18px;
+        text-decoration: none;
+      }
+      .drafts:hover {
+        border-radius: 10px;
+        background-color: rgb(180, 175, 175);
+        padding: 5px;
+      }
+      span {
+        background-color: grey;
+        padding: 3px 2px;
+      }
+      hr {
+        width: 700px;
+      }
+      .circle-dot {
+        width: 20px;
+        height: 20px;
+        border: 1px dashed #000;
+        border-radius: 50%;
+        background-color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        left: 11px;
+      }
+      .dropdown {
+        display: flex;
+        align-items: center;
+        width: 244px;
+        position: relative;
+        left: 283px;
+        padding: 5px;
+        top: 3px;
+      }
+      select {
+        background: white;
+        position: relative;
+        border: 0px;
+        outline: 0px;
+        left: 32px;
+        border: 0px;
+        cursor: pointer;
+      }
+      .dropdown-input {
+        padding: 10px;
+        width: 200px;
+        border: 1px solid white;
+        cursor: pointer;
+        margin: 3px;
+      }
+      input[type="text"]:focus {
+        outline: 2px solid rgb(241, 241, 241);
+      }
+      #communitydropdown {
+        display: none;
+        position: absolute;
+        z-index: 2;
+        left: 298px;
+        top: 164px;
+        width: 250px;
+        height:450px;
+        background-color: rgb(226, 226, 248);
+      }
+      .profile {
+        display: flex;
+        width: 185px;
+        height: 46px;
+        border: 0 px solid;
+        margin-top: 7px;
+      }
+      h6 {
+        position: relative;
+        bottom: 20px;
+        color: grey;
+      }
+      h5 {
+        position: relative;
+        right: 39px;
+        top: 4px;
+      }
+      .bottomline {
+        width: 250px;
+      }
+      .communitybox {
+        display: flex;
+        align-items: center;
+        width: 211px;
+      }
+      .createCommunity {
+        text-decoration: none;
+        position: relative;
+        left: 10px;
+      }
+      .community {
+        width: 250px;
+        display: contents;
+        outline: 2px;
+        height: 590px;
+        background-color: ghostwhite;
+      }
+      .postbox {
+        border: 2px solid rgb(255, 255, 255);
+        outline: 2px;
+        width: 700px;
+        height: 450px;
+        display: flex;
+        position: relative;
+        left: 288px;
+        background-color: rgb(226, 226, 248);
+      }
+      .postsection,
+      .imagesection,
+      .Link,
+      .poll {
+        display: flex;
+        height: 65px;
+        width: 165px;
+        border-right: 1px solid rgb(192, 192, 198);
+        border-bottom: 1px solid rgb(192, 192, 198);
+      }
+      img {
+        height: 60px;
+      }
+     .postsection {
+        width: 193px;
+        justify-content: center;
+      }
+      .imagesection {
+        width: 269px;
+        justify-content: center;
+      }
+      .Link {
+        width: 257px;
+        justify-content: center;
+      }
+      .poll {
+        justify-content: center;
+        width: 180px;
+      }
+      .postbody {
+        display: grid;
+        justify-content: center;
+        position: relative;
+        bottom: 365px;
+      }
+      .postbody input {
+        width: 530px;
+        height: 30px;
+      }
+      .postbody textarea {
+        width: 534px;
+        height: 200px;
+        margin: 7px;
+        resize: none;
+      }
+      .title {
+        margin: 7px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        bottom: 368px;
+      }
+      .title input{
+        width: 530px;
+        height: 20px;
+      }
+      .imagebody {
+        display: none;
+        text-align: center;
+        position: relative;
+        bottom: 365px;
+      }
+      .imagetitle {
+        padding-right: 58px;
+        height: 30px;
+        margin: 7px;
+        margin-left: 170px;
+      }
+      .imagetitle input {
+        padding-right: 388px;
+        margin-right: 45px;
+        padding-bottom: 20px;
+      }
+      .imagefile {
+        display: block;
+        margin: 23px;
+        margin-left: 162px;
+        padding: 9px;
+      }
+      .pollbody {
+        display: none;
+        text-align: center;
+        position: relative;
+        bottom: 365px;
+      }
+      .linkbody {
+        display: none;
+        text-align: center;
+        position: relative;
+        bottom: 365px;
+      }
+      .linktitle {
+        margin: 7px;
+      }
+      img{
+       position: relative;
+       width: 55px;
+       top: 10px;
+       height: 38px;
+      }
+      .linkurl input {
+        padding-right: 356px;
+        padding-bottom: 70px;
+      }
+      .linktitle input {
+        padding-right: 313px;
+        padding-bottom: 20px;
+      }
+      .polltitle input {
+        margin: 10px;
+        width: 501px;
+        height: 30px;
+      }
+      .polltextarea {
+        width: 536px;
+        padding-bottom: 80px;
+        resize: none;
+      }
+      .postsave {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        position: relative;
+        left: 49px;
+        top: 45px;
+      }
+      .postsave .draft {
+        border: 0px solid white;
+        padding: 6px;
+        width: 100px;
+        border-radius: 18px;
+        background-color: white;
+        color: #cec4d7;
+        font-size: 16px;
+        margin: 6px;
+      }
+      .postsave .save {
+        width: 100px;
+        border-radius: 18px;
+        background-color: rgba(236, 225, 225, 0.51);
+        color: rgb(27, 25, 25);
+        font-size: 16px;
+      }
+      .imagesave {
+        position: relative;
+        top: 187px;
+        left: 200px;
+      }
+      .imagesave .draft {
+        border: 0px solid white;
+        padding: 6px;
+        width: 100px;
+        border-radius: 18px;
+        background-color: white;
+        color: #cec4d7;
+        font-size: 16px;
+        margin: 6px;
+      }
+      .imagesave .save {
+        padding: 5px;
+        width: 100px;
+        border-radius: 18px;
+        background-color: rgba(236, 225, 225, 0.51);
+        color: rgb(27, 25, 25);
+        font-size: 16px;
+      }
+      .linksave {
+        position: relative;
+        top: 170px;
+        left: 200px;
+      }
+      .linksave .save {
+        padding: 5px;
+        width: 100px;
+        border-radius: 18px;
+        background-color: rgba(236, 225, 225, 0.51);
+        color: rgb(27, 25, 25);
+        font-size: 16px;
+      }
+      .linksave .draft {
+        border: 0px solid white;
+        padding: 6px;
+        width: 100px;
+        border-radius: 18px;
+        background-color: white;
+        color: #cec4d7;
+        font-size: 16px;
+        margin: 6px;
+      }
+      .pollsave {
+        position: relative;
+        top: 140px;
+        left: 200px;
+      }
+      .pollsave .save {
+        padding: 5px;
+        width: 100px;
+        border-radius: 18px;
+        background-color: rgba(236, 225, 225, 0.51);
+        color: rgb(27, 25, 25);
+        font-size: 16px;
+      }
+      .choosecommunity {
+        position: relative;
+        left: 29px;
+        display: flex;
+        align-items: center;
+      }
+      .pollsave .draft {
+        border: 0px solid white;
+        width: 100px;
+        padding: 6px;
+        border-radius: 18px;
+        background-color: white;
+        color: #cec4d7;
+        font-size: 16px;
+        margin: 6px;
+      }
+      .circlecommunity {
+        display: flex;
+        background-color: white;
+        padding: 5px;
+        width: 300px;
+      }
+       #communityoptions {
+        padding: 0px 20px 0px 20px;
+        height: 25px;
+      }
+      .profilepic {
+        height: 35px;
+        width: 37px;
+        position: relative;
+        right: 51px;
+        top: 19px;
+      }
+      .username{
+        position: relative;
+        top: 24px;
+        right: 39px;
+      }
+      .container{
+      width:1280px;
+      margin:0 auto;
+      }
+
+    </style>
+  <script>
+      function dropdown(event) {
+        let targetDiv = document.getElementById("communitydropdown");
+        if (targetDiv.style.display === "none") {
+          targetDiv.style.display = "block";
+        } else {
+          targetDiv.style.display = "none";
+        }
+      }
+
+      function dropdownclick(event) {
+        let targetDiv = document.getElementById("communitydropdown");
+        if (targetDiv.style.display === "block") {
+          targetDiv.style.display = "none";
+        }
+      }
+
+      function imagepage(event) {
+        let targetDiv = document.getElementById("post");
+        let imageDiv = document.getElementById("image");
+        let linkdiv = document.getElementById("link");
+        let polldiv = document.getElementById("poll");
+        targetDiv.style.display = "none";
+        imageDiv.style.display = "grid";
+        linkdiv.style.display = "none";
+        polldiv.style.display = "none";
+      }
+      function postpage(event) {
+        let targetDiv = document.getElementById("post");
+        let imageDiv = document.getElementById("image");
+        let linkdiv = document.getElementById("link");
+        let polldiv = document.getElementById("poll");
+        targetDiv.style.display = "grid";
+        imageDiv.style.display = "none";
+        linkdiv.style.display = "none";
+        polldiv.style.display = "none";
+      }
+      function linkpage(event) {
+        let targetDiv = document.getElementById("post");
+        let imageDiv = document.getElementById("image");
+        let linkdiv = document.getElementById("link");
+        let polldiv = document.getElementById("poll");
+        targetDiv.style.display = "none";
+        imageDiv.style.display = "none";
+        linkdiv.style.display = "grid";
+        polldiv.style.display = "none";
+      }
+      function pollpage(event) {
+        let targetDiv = document.getElementById("post");
+        let imageDiv = document.getElementById("image");
+        let linkdiv = document.getElementById("link");
+        let polldiv = document.getElementById("poll");
+        targetDiv.style.display = "none";
+        imageDiv.style.display = "none";
+        linkdiv.style.display = "none";
+        polldiv.style.display = "grid";
+      }
+    </script>
+</head>
+<body>
+<div class="container">
+<div class="post" onclick="dropdownclick(event)">
+  <h3 class="postheader">Create a post</h3>
+  <div class="box">
+    <div class="drafts">
+      <b><a th:href="@{/draft}">Drafts</a></b>
+      <span id="number" th:text="${draftedPosts}"></span>
+    </div>
+  </div>
+</div>
+<hr />
+<div class="dropdown">
+  <div class="circlecommunity">
+    <div class="circle-dot"></div>
+    <div class="choosecommunity">Choose a community</div>
+    <select id="selection" onclick="dropdown(event)"></select>
+  </div>
+</div>
+<form th:action="@{/save-post}" method="post">
+  <div id="communitydropdown">
+    <div class="profile">
+      <h6>Your Profile</h6>
+      <img class="profilepic"src="https://cdn2.iconfinder.com/data/icons/itty-bitty-animal-avatars/128/itty_bitty_tiger_01-64.png"/>
+      <label class="username" th:text="${#authentication.name}"></label>
+    </div>
+    <hr class="bottomline" />
+    <div class="community">
+      <div class="communitybox">
+        <p>Your communities</p>
+        <a href="" class="createCommunity">Create New</a>
+      </div>
+      <div class="communitynames">
+        <select  id="communityoptions" name="communityName">
+          <option value="">-- Select a community --</option>
+          <option th:each="community :${communityList}" th:value="${community.communityName}" th:text="${community.communityName}" ></option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="postbox">
+      <div class="postsection" onclick="postpage(event)">
+        <img width="50px" src="https://cdn0.iconfinder.com/data/icons/ui-essence/32/_48ui-64.png" />
+        <h3>Post</h3>
+      </div>
+      <div class="imagesection" onclick="imagepage(event)">
+        <img width="50px" src="https://cdn2.iconfinder.com/data/icons/photo-and-video-ui/140/_gallery-64.png"/>
+        <h3>Images and videos</h3>
+      </div>
+      <div class="Link" onclick="linkpage(event)">
+        <img width="50px" src="https://cdn3.iconfinder.com/data/icons/streamline-icon-set-free-pack/48/Streamline-67-256.png"/>
+        <h3>Link</h3>
+      </div>
+    </div>
+    <div class="title">
+      <input type="hidden" th:value="${editDraft.draftId}" name="draftId">
+      <input type="text" placeholder="Tittle" th:value="${editDraft.title}"  name="title" required />
+    </div>
+    <div class="postbody" id="post">
+      <textarea name="content" th:text="${editDraft.content}" placeholder="Text(optional)"></textarea>
+      <div class="buttons">
+        <div class="postsave">
+          <input type="submit" name="edit-draft" class="draft" value="save Draft" />
+          <input class="save" name="post-draft" type="submit" value="Post" />
+        </div>
+      </div>
+    </div>
+    <div class="imagebody" id="image">
+
+      <div class="imagefile">
+        <input type="file"  name="image" multiple accept="image/*,video/*" enctype="multipart/form-data" />
+      </div>
+      <div class="buttons">
+        <div class="imagesave">
+          <input class="draft" name="cancel" type="submit" value="Cancel" />
+          <input class="save" type="submit" value="Post" />
+        </div>
+      </div>
+    </div>
+
+    <div class="linkbody" id="link">
+      <div class="linkurl">
+        <input type="url" th:value="${editDraft.draftUrl}" name="url" placeholder="url" />
+      </div>
+      <div class="buttons">
+        <div class="linksave">
+          <input class="draft" type="submit"  name="update draft" value="update Draft" />
+          <input class="save" name="post-draft" type="submit" value="Post" />
+        </div>
+      </div>
+    </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+</div>
+</body>
+</html>

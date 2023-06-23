@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Post | Reddit</title>
+    <link rel="stylesheet" th:href="@{/css/view.css}"/>
+</head>
+<body>
+<main>
+
+    <header id="pageHeader">
+        <div id="header-logo">
+            <a href="">
+                <img th:src="@{/images/Reddit-logo.png}" alt="logo" class="header-img"/>
+            </a>
+        </div>
+        <div id="home-nav">
+            <img th:src="@{/images/home.png}" alt="home" class="header-img"/>
+            <h4 class="header-text">Home</h4>
+        </div>
+        <div id="home-search">
+            <form action="/search/">
+                <input
+                        name="q"
+                        type="search"
+                        class="search-bar"
+                        placeholder="Search Reddit"
+                />
+            </form>
+        </div>
+        <div id="header-options">es
+            <a href="">
+                <img th:src="@{/images/popular.png}" alt="home" class=".header-options-img"/>
+            </a>
+
+            <a href="">
+                <img th:src="@{/images/notify.png}" alt="home"/>
+            </a>
+
+            <a href="">
+                <img th:src="@{/images/message.png}" alt="home"/>
+            </a>
+
+            <a href="">
+                <img th:src="@{/images/plus.png}" alt="home"/>
+            </a>
+        </div>
+
+        <div id="header-profile">
+            <div id="header-profile-pic">
+                <img th:src="@{/images/dp.png}" alt="picture"/>
+            </div>
+
+            <div id="header-profile-details">
+                <div id="username-div">
+                    <p>sham_yaswanth</p>
+                </div>
+
+                <div id="karma-div">
+                    <img th:src="@{/images/karma-star.png}" alt="star"/>
+                    <p>100786 karma</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <article id="mainArticle">
+        <div id="posts-main">
+            <div id="posts-div">
+                <div class="post">
+                    <div class="post-container-1">
+                        <div class="post-vote-container">
+
+
+                            <form action="" method="post" id="up-form"
+                                  th:action="@{'/'+${postData.isCommunity ? 'r/' + postData.getCommunity().getCommunityName() : 'u/' + postData.getUser().getUsername()} +'/'+ ${postData.getPostId()}  + '/upvote'}"
+                            >
+
+                            </form>
+
+                            <img th:src="@{/images/upvote.png}" alt="" class="vote-img" id = "post-up"
+                            />
+                            <p th:text="${postData.getUpVotes() - postData.getDownVotes()}"></p>
+                            <form action="" method="post" id="down-form"
+                                  th:action="@{'/'+${postData.isCommunity ? 'r/' + postData.getCommunity().getCommunityName() : 'u/' + postData.getUser().getUsername()} +'/'+ ${postData.getPostId()}  + '/down-vote'}"
+                            >
+
+                            </form>
+
+                            <img th:src="@{/images/downvote.png}" alt="" class="vote-img" id="post-down"
+                            />
+                        </div>
+
+                        <div class="post-data">
+                            <div class="post-user-data">
+                                <a href="" class="post-c-name" th:if="${postData.getIsCommunity()}">
+                                    <h4 th:text="${'r/' + postData.getCommunity().getCommunityName()}"></h4>
+                                </a>
+
+                                <a href="" class="post-c-name" th:if="${!postData.getIsCommunity()}">
+                                    <h th:text="${'u/' + postData.getUser().getUsername()}"></h>
+                                </a>
+
+                                <p style="margin:0px 5px">. posted by</p>
+                                <a href="" class="post-c-name">
+                                    <h4 th:text="${'u/' + postData.getUser().getUsername()}"></h4>
+                                </a>
+                                <p style="margin-left: 5px">on
+                                    <span th:text="${#dates.format(postData.getPublishedAt(),'dd-MMMM-yyyy')}"></span>
+                                </p>
+
+                            </div>
+
+                            <div class="post-content">
+                                <h5 th:text="${postData.getTitle()}" class="post-title"></h5>
+                                <p th:if="${postData.getContent() != null}" th:text="${postData.getContent()}"></p>
+                            </div>
+
+                            <div th:if="${postData.getMediaList() != null && postData.getMediaList().size() > 0 }"
+                                 th:remove="tag">
+                                <div th:each="media : ${postData.getMediaList()}" th:remove="tag">
+
+                                    <div class="post-media" th:if="${media.getIsVideo()}">
+
+                                        <div class="video-container" style="--aspect-ratio: 2 / 3">
+
+                                            <video controls>
+                                                <source th:src="${media.getPathUrl()}" type="video/mp4"/>
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                    </div>
+
+                                    <div th:if="${!media.getIsVideo()}" th:remove="tag">
+
+
+                                        <div class="post-media">
+                                            <div class="image-container" style="--aspect-ratio: 2 / 3">
+                                                <img th:src="${media.getPathUrl()}" alt=""/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="post-options">
+                                <div class="post-comments">
+                                    <img th:src="@{/images/comments.png}" alt="" class="comments-img"/>
+                                    <p th:if="${postData.getComments() != null}" th:text="${postData.getComments().size() + '  comments'}" style="margin-right: 10px">
+
+                                    </p>
+                                </div>
+
+                                <a href="">
+                                    <div class="post-share">
+                                        <img th:src="@{/images/share.png}" alt="" class="share-img"/>
+                                        <p>share</p>
+                                    </div>
+                                </a>
+
+                                <a href="">
+                                    <div class="post-save">
+                                        <img th:src="@{/images/save.png}" alt="" class="save-img"/>
+                                        <p>Save</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="post-comments-div">
+                        <div class="create-comment">
+                            <div class="commenter-div">
+                                <p>Commenting as <a href="">sham_yash</a></p>
+                                </p>
+                            </div>
+                            <form th:action="@{'/'+${postData.isCommunity ? 'r/' + postData.getCommunity().getCommunityName() : 'u/' + postData.getUser().getUsername()} + '/comments/' + ${postData.getPostId()} +'/add'}"
+                                  method="post"
+                                  th:object="${commentDto}">
+                                <div class="comment-textarea">
+                                    <textarea name="" id="" cols="55" rows="8" th:field="*{comment}"></textarea>
+                                </div>
+                                <div class="comment-submmit">
+                                    <input type="submit" value="Comment"/>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Comments of post start here -->
+                        <div id="post-comments-box">
+                            <div class="comment-box" th:each="comment : ${postData.getComments()}">
+                                <div class="main-comment">
+                                    <div class="commenter-profile">
+                                        <div class="commenter-pic">
+                                            <img th:src="@{/images/dp.png}" alt=""/>
+                                        </div>
+                                        <div class="comment-user-data">
+                                            <p>
+                                                <a class="comment-username" href=""
+                                                   th:text="${'u/' + comment.getUser().getUsername()}">
+                                                </a
+                                                >
+                                                <span th:text="${#dates.format(comment.getCommentedAt(),'dd-MMMM-yyyy')}"></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="comment-conetent-data">
+                                        <p th:text="${comment.getContent()}"></p>
+                                    </div>
+
+                                    <div class="comment-vote-div">
+                                        <form action="" th:action="@{'/'+${postData.isCommunity ? 'r/' + postData.getCommunity().getCommunityName() : 'u/' + postData.getUser().getUsername()} +'/'+ ${postData.getPostId()} + '/comment/' + ${comment.getCommentId()} + '/upvote'}"
+                                        method="post">
+                                            <input
+                                                    type="submit"
+                                                    name=""
+                                                    value="upvote"
+                                                    class="u-vote-form-btn"
+                                            />
+                                        </form>
+                                        <p class="comment-vote-nums" th:text="${comment.getUpVotes() - comment.getDownVotes()}"></p>
+                                        <form action="" th:action="@{'/'+${postData.isCommunity ? 'r/' + postData.getCommunity().getCommunityName() : 'u/' + postData.getUser().getUsername()} +'/'+ ${postData.getPostId()} + '/comment/' + ${comment.getCommentId()} + '/down-vote'}"
+                                        method="post">
+                                            <input
+                                                    type="submit"
+                                                    name=""
+                                                    value="downvote"
+                                                    class="d-vote-form-btn"
+                                            />
+                                        </form>
+                                        <a href="" class="comment-reply-link"
+                                        ><img th:src="@{/images/comments.png}" alt=""
+                                              class="reply-img">Reply</a
+                                        >
+                                    </div>
+                                </div>
+
+                                <div class="add-reply">
+                                    <div class="create-comment">
+                                        <div class="commenter-div">
+                                            <p>Commenting as <a href="">sham_yash</a></p>
+
+                                        </div>
+                                        <form action=""
+                                              th:action="@{'/'+${postData.isCommunity ? 'r/' + postData.getCommunity().getCommunityName() : 'u/' + postData.getUser().getUsername()}+ '/comments/' + ${postData.getPostId()} +'/reply/'+ ${comment.getCommentId()}}"
+                                              method="post" th:object="${commentDto}">
+                                            <div class="comment-textarea">
+                            <textarea
+                                    name=""
+                                    cols="55"
+                                    rows="8"
+                                    th:field="*{comment}"
+                            ></textarea>
+                                            </div>
+                                            <div class="comment-submmit">
+                                                <input type="submit" value="Comment"/>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="comment-reply-box">
+                                    <div class="reply-comment" th:each="reply : ${comment.getReplyComments()}">
+                                        <div class="commenter-profile">
+                                            <div class="commenter-pic">
+                                                <img th:src="@{/images/dp.png}" alt=""/>
+                                            </div>
+                                            <div class="comment-user-data">
+                                                <p>
+                                                    <a class="comment-username" href=""
+                                                       th:text="${'u/' + reply.getUser().getUsername()}">
+                                                    </a
+                                                    >
+                                                    <span th:text="${#dates.format(reply.getRepliedAt(),'dd-MMMM-yyyy')}"></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="comment-conetent-data">
+                                            <p th:text="${reply.getContent()}"></p>
+                                        </div>
+                                                                                                                                                                        <!-- /{accountType}/{username}/{postId}/comment/{commentId}/upvote-reply/{replyId}-->
+                                        <div class="comment-vote-div">
+                                            <form action=""
+                                                  th:action="@{'/'+${postData.isCommunity ? 'r/' + postData.getCommunity().getCommunityName() : 'u/' + postData.getUser().getUsername()} +'/'+ ${postData.getPostId()} + '/comment/' + ${comment.getCommentId()} + '/upvote-reply/' + ${reply.getReplyId()}}"
+                                                  method="post"
+                                            >
+                                                <input
+                                                        type="submit"
+                                                        name=""
+                                                        value="upvote"
+                                                        class="u-vote-form-btn"
+                                                />
+                                            </form>
+                                            <p class="comment-vote-nums" th:text="${reply.getUpVotes() - reply.getDownVotes()}"></p>
+                                            <form action=""
+                                                  th:action="@{'/'+${postData.isCommunity ? 'r/' + postData.getCommunity().getCommunityName() : 'u/' + postData.getUser().getUsername()} +'/'+ ${postData.getPostId()} + '/comment/' + ${comment.getCommentId()} + '/down-vote-reply/' + ${reply.getReplyId()}}"
+                                            method="post">
+                                                <input
+                                                        type="submit"
+                                                        name=""
+                                                        value="downvote"
+                                                        class="d-vote-form-btn"
+                                                />
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- General Media post's End -->
+
+            <!-- Posts nav div start -->
+
+            <div id="posts-nav-div">
+                <div id="div-about-community">
+                    <div class="div-about-community-heading">
+                        <h3 th:if="${postData.getIsCommunity()}">About Community</h3>
+                        <h3 th:if="${!postData.getIsCommunity()}">About the Account</h3>
+                    </div>
+                    <div id="community-dp-name">
+                        <div id="community-nav-pic">
+                            <img th:src="@{/images/dp.png}" alt=""/>
+                        </div>
+                        <div class="community-nav-name" th:if="${postData.getIsCommunity()}">
+                            <h2 th:text="${postData.getCommunity().getCommunityName()}"></h2>
+                        </div>
+                        <div class="community-nav-name" th:if="${!postData.getIsCommunity()}">
+                            <h2 th:text="${postData.getUser().getUsername()}"></h2>
+                        </div>
+                    </div>
+                    <div id="div-community-info">
+                        <p>
+                            This subreddit is to discuss the current happenings in Taarak
+                            Mehta Ka Ooltah Chashmah(TMKOC) and post memes and other stuff
+                            about it.
+                        </p>
+                    </div>
+
+                    <div id="div-community-created" th:if="${postData.getIsCommunity()}">
+                        <img th:src="@{/images/bday.png}" alt=""/>
+                        <p>Created
+                            <span th:text="${#dates.format(postData.getCommunity().getCreatedAt(),'dd-MMMM-yyyy')}"></span>
+                        </p>
+                    </div>
+
+
+                    <div id="user-karma-cake" th:if="${!postData.getIsCommunity()}">
+                        <div id="nav-karma">
+                            <div id="nav-karma-inside"><p>Karma</p></div>
+                            <div id="karma-count">
+                                <img th:src="@{/images/karma-star.png}" alt=""/>
+                                <p>98767</p>
+                                <!--                                <p th:text="${postData.getUser().getKarma()}"></p>-->
+                            </div>
+                        </div>
+
+                        <div id="nav-cake">
+                            <div id="nav-cake-heading"><p>Cake day</p></div>
+                            <div><p>21 Dec 2020</p></div>
+                        </div>
+                    </div>
+
+                    <div id="div-community-people" th:if="${postData.getIsCommunity()}">
+                        <h4>Total Members : <span
+                                th:text="${postData.getCommunity().getCommunityMembers().size()}"></span></h4>
+                    </div>
+                    <div id="nav-create-post">
+                        <a th:href="@{/new-post}">Create Post</a>
+                    </div>
+                </div>
+
+                <!-- Moderators List -->
+
+                <div id="div-about-moderators" th:if="${postData.getIsCommunity()}">
+                    <div class="div-about-community-heading">
+                        <h3>Moderators</h3>
+                    </div>
+                    <div id="nav-contact-moderators">
+                        <a href="" id="message-mod">Message Moderator </a>
+                        <div id="mod-names"
+                             th:each=" moderator,counter : ${postData.getCommunity().getCommunityModerators()}"
+                             th:if="${counter.count} <= 4">
+                            <a href="" class="mod-name-link"
+                            ><p class="mod-name" th:text="${'u/' + moderator.getUsername()}"></p></a
+                            >
+                        </div>
+                        <div id="all-mods">
+                            <a href="" class="mod-name-link all-mod">View All Mods</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+    <nav id="mainNav"></nav>
+</main>
+<script th:src="@{/js/view-page.js}"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Choose Profile Photo</title>
+    <style>
+  /* Center the form */
+  .upload-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  /* Style the form */
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+
+  /* Style the file input */
+  input[type="file"] {
+    margin-bottom: 10px;
+  }
+
+  /* Style the submit button */
+  button[type="submit"] {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4caf50;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<div class="upload-form-container">
+<form method="POST" th:action="@{/upload}" enctype="multipart/form-data">
+  <input type="hidden" name="userId" th:value="${userId}">
+  <input type="file" name="file" accept="image/*" />
+  <button type="submit">Upload</button>
+</form>
+</div>
+</body>
+</html>

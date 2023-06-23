@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    .draft-content{
+        display: flex;
+        justify-content: space-between;
+        border: 2px solid;
+        padding: 6px;
+        margin: 5px;
+        }
+    p{
+         display: flex;
+         align-items: center;
+        }
+    .edit{
+         text-decoration: none;
+         color: black;
+         font-size: 20px;
+         font-weight: 900;
+    }
+    </style>
+</head>
+<body>
+<div th:each="draft : ${draftedPosts}">
+    <div class="draft-content">
+        <a class="edit" th:href="@{/edit/draft(draftId=${draft.draftId})}">
+            <p th:text="${draft.title}"></p>
+        </a>
+        <a  th:href="@{/delete/draft(draftId=${draft.draftId})}" >
+            <img src="https://cdn4.iconfinder.com/data/icons/evil-icons-user-interface/64/basket-64.png">
+        </a>
+    </div>
+</div>
+</body>
+</html>

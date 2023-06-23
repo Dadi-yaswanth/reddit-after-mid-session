@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>User Profile</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}"/>
+    <style>
+      body {
+        background-color: rgb(237 237 237);
+      }
+      .container1 {
+        position: relative;
+        display: inline;
+        width: 451px;
+        height: 908px;
+        padding: 0px;
+        padding-right: 0px;
+        text-align: left;
+        margin-right: 202px;
+        margin-top: 17px;
+        justify-content: space-around;
+        float: right;
+        overflow: auto;
+        height: 979px;
+      }
+
+      .profile {
+        display: flex;
+        height: 50vh;
+        align-items: center;
+        background-color: rgb(95, 196, 226);
+        height: 146px;
+      }
+      .user-profile-picture {
+        position: relative;
+        width: 436px;
+        height: 146px;
+        margin-left: -10px;
+        margin-top: -48px;
+        max-height: 400px;
+      }
+      .add-img-btn {
+        position: absolute;
+        top: 98px;
+        background: none;
+        border: none;
+        padding: 0;
+      }
+      .setting-img-btn {
+        position: absolute;
+        top: 96px;
+        left: 364px;
+        background: none;
+        border: none;
+        padding: 0;
+      }
+
+      .profile-picture {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-left: 10px;
+        border-radius: 0;
+      }
+
+      .profile-name {
+        position: relative;
+        font-weight: bold;
+        top: 9px;
+        left: 150px;
+      }
+
+      .profile-description {
+        position: relative;
+        top: 14px;
+        left: 154px;
+      }
+      .profile-details {
+        padding-top: 55px;
+        padding-left: 20px;
+        background-color: #f1f4f8;
+      }
+
+      .button1,
+      .button2,
+      .button3 {
+        border-radius: 12px;
+      }
+
+      .round-button1 {
+        display: flex;
+        border: none;
+        border-radius: 20px;
+        padding: 10px 20px;
+        background-color: #d8481c;
+        color: #fff;
+        cursor: pointer;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
+        height: 100%;
+      }
+      .round-button2 {
+        display: flex;
+        border: none;
+        border-radius: 20px;
+        padding: 10px 20px;
+        background-color: #5278f7;
+        color: #fff;
+        cursor: pointer;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
+        height: 100%;
+      }
+      .dob {
+        margin-right: 10px;
+      }
+      .button4 {
+        position: relative;
+        bottom: 10px;
+        right: 10px;
+      }
+
+      .round-button1,
+      .round-button2:hover {
+        background-color: #ec8d4d;
+      }
+      input#image:focus {
+        background-color: #f5f8fa !important;
+        border: 1px solid #dadada;
+      }
+      img.avatar {
+        position: relative;
+        margin-left: 125px;
+        margin-top: -74px;
+        width: 104px;
+      }
+      .karma_dob {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .more-option {
+        margin-top: 10px;
+        display: inline-block;
+        justify-content: space-between;
+      }
+
+      .post-container {
+        width: 582px;
+        border: 2px solid #ccc;
+        padding: 20px;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        flex: auto;
+      }
+
+      .view_post {
+        display: block;
+        text-decoration: none;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #fff;
+        width: 219px;
+        flex: auto;
+      }
+
+      .view_post:hover {
+        background-color: #f5f5f5;
+      }
+      .moderator-container {
+        background-color: #f2f2f2;
+        padding: 20px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        text-align: center;
+        margin-right: 22px;
+      }
+
+      .moderator-container h2 {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      .community {
+        background-color: #fff;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      .community p {
+        margin: 0;
+      }
+
+      .community strong {
+        font-weight: bold;
+      }
+
+      .empty-message {
+        color: #999;
+        font-style: italic;
+      }
+
+      .community_moderator-container {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        text-align: center;
+        margin-right: 22px;
+      }
+
+      .community_moderator-container h2 {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      .community {
+        background-color: #fff;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .owned-community-container {
+        background-color: #fff;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 2px solid #ccbfbf;
+        border-radius: 4px;
+        margin-right: 22px;
+      }
+
+      .community p {
+        margin: 0;
+      }
+
+      .community strong {
+        font-weight: bold;
+      }
+
+      .empty-message {
+        color: #999;
+        font-style: italic;
+      }
+      .all-posts {
+        bottom: 62em;
+        width: 63%;
+        position: relative;
+        min-height: 10%;
+        display: flex;
+        padding-left: 10%;
+      }
+      #post-div {
+        width: 57%;
+        background-color: white;
+        top: 16px;
+        position: relative;
+      }
+      .posts {
+        /* border: 2px solid red; */
+        min-height: 8.6rem;
+        margin-left: 15px;
+        margin-right: 15px;
+        display: flex;
+        background-color: #ffffff;
+        margin-bottom: 2rem;
+        padding-left: 85px;
+      }
+    </style>
+</head>
+<body>
+<div class="user_profile">
+
+  <div class="container1">
+    <div class="profile">
+      <div class="profile-picture">
+          <div th:if="${user?.profilePhoto?.fileName != null and user?.profilePhoto?.fileName != ''}">
+          <img class="user-profile-picture" th:src="@{/uploads/__${user.profilePhoto.fileName}__}">
+          </div>
+        <img class="avatar" src="https://i.redd.it/snoovatar/avatars/84676aee-4389-407c-be62-68182ed59e6f.png">
+       <form th:action="@{/selectPhoto}" method="get">
+           <input type="hidden" name="userId" th:value="${user.userId}">
+        <button class="add-img-btn">
+          <img width="30px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThGnzqP2A8anXXPUVtVHg828_lWK3QMwAFSUq8FmVMMyfqCf5SmOLNLkajY5b39D8VY1s&usqp=CAU">
+        </button>
+       </form>
+
+          <form th:action="@{/change_password_email}" method="get">
+              <input type="hidden" name="userId" th:value="${user.userId}">
+              <button class="setting-img-btn">
+                  <img width="35px" src="https://images.cdn4.stockunlimited.net/preview1300/setting-button_1386478.jpg" style="border-radius: 50%;">
+              </button>
+          </form>
+      </div>
+    </div>
+
+    <div class="profile-details">
+      <h3 class="profile-name"><span id="name" th:text="${user.username}"></span></h3>
+      <div class="profile-description"><span id="displayName" th:text="${user.displayName}"></span></div><br>
+      <div class="button1"><button class="round-button1">Create Avatar &rarr;</button></div>
+      <div class="karma_dob">
+        <div class="karma_points">
+          <h4>Karma</h4>
+          <p><span id="karma" th:text="${user.karma}"></span></p>
+        </div>
+        <div class="dob">
+          <h4>Cake Day</h4>
+          <p>June 16, 2023</p>
+        </div>
+      </div><br>
+      <form th:action="@{/new-post}">
+          <input type="hidden" name="userId" th:value="${user.userId}">
+        <div class="button3"><button class="round-button2">New Post &rarr;</button></div><br>
+      </form>
+        <form th:action="@{/new-community}">
+            <input type="hidden" name="userId" th:value="${user.userId}">
+            <div class="button3"><button class="round-button2">New Community &rarr;</button></div><br><br>
+        </form>
+
+        <div class="moderator-container">
+          <h2>Joined Community Details</h2>
+          <div th:if="${user.communityMembers.empty}">
+            <p>No Community found.</p>
+          </div>
+          <a th:each="community : ${user.communityMembers}" >
+            <div class="community" th:if="${not user.communityMembers.empty}">
+              <p><strong>Community Name:</strong> <span th:text="${community.communityName}"></span></p>
+            </div>
+          </a>
+        </div>
+        <br><br>
+        <div class="community_moderator-container">
+          <h2>moderator Details</h2>
+          <div th:if="${user.communityModerators.empty}">
+            <p>No Community found.</p>
+          </div>
+          <a th:each="community : ${user.communityModerators}" >
+            <div class="community" th:if="${not user.communityModerators.empty}">
+              <p><strong>Community Name:</strong> <span th:text="${community.communityName}"></span></p>
+            </div>
+          </a>
+        </div>
+        <br><br><br>
+        <div class="owned-community-container">
+            <h2>owned-community</h2>
+            <div th:if="${user.ownedCommunities.empty}">
+                <p>No Community found.</p>
+            </div>
+            <a th:each="community : ${user.ownedCommunities}" >
+                <div class="community" th:if="${not user.ownedCommunities.empty}">
+                    <p><strong>Community Name:</strong> <a th:href="@{'/view-community/' + ${community.communityName}}"><span th:text="${community.communityName}"></span></a></p>
+                </div>
+            </a>
+        </div>
+        <br><br><br>
+</div>
+</div>
+    <div class="all-posts">
+        <div id="post-div">
+            <div class="posts" th:each="post : ${user.userPosts}">
+                            <div class="post-vote-container">
+                                <a href=""><img th:src="@{images/upvote.png}" alt="" class="vote-img"/></a>
+                                <p>34567</p>
+                                <a href=""
+                                ><img th:src="@{images/downvote.png}" alt="" class="vote-img"
+                                /></a>
+                            </div>
+                <div th:if="${not user.userPosts.empty}">
+                    <div class="post-data">
+                        <div class="post-user-data">
+                            <a href="" class="post-c-name" th:if="${post.getIsCommunity()}">
+                                <h4 th:text="${'r/' + post.getCommunity()}"></h4>
+                            </a>
+
+                            <!--                    <a href="" class="post-c-name" th:if="${!postData.getIsCommunity()}">-->
+                            <!--                        <h th:text="${'u/' + postData.getUser().getUsername()}"></h>-->
+                            <!--                    </a>-->
+
+                            <p style="margin:0px 5px">. posted by</p>
+                            <a href="" class="post-c-name">
+                                <h4 th:text="${'u/' + user.getUsername()}"></h4>
+                            </a>
+                            <p style="margin-left: 5px">on
+                                <span th:text="${#dates.format(post.getPublishedAt(),'dd-MMMM-yyyy')}"></span>
+                            </p>
+                        </div>
+                        <a href="">
+                            <!--                   th:href="@{'/' + ${postData.isCommunity ? 'r/'+ postData.getCommunity().getCommunityName() : 'u/' + postData.getUser().getUsername()} + '/comments/' + ${postData.getPostId()}}"-->
+                            <div class="post-content">
+                                <h5 th:text="${post.getTitle()}" class="post-title"></h5>
+                                <p th:if="${post.getContent() != null}" th:text="${post.getContent()}"></p>
+                            </div>
+                        </a>
+                        <div th:if="${post.getMediaList() != null && post.getMediaList().size() > 0 }"
+                             th:remove="tag">
+                            <div th:with="media=${post.getMediaList().get(0)}" th:remove="tag" >
+
+                                <div class="post-media" th:if="${media.getIsVideo()}">
+                                    <div class="video-container" style="--aspect-ratio: 2 / 3">
+                                        <!--                                            <iframe th:src="${media.getPathUrl()}"></iframe>-->
+                                        <video controls>
+                                            <source th:src="${media.getPathUrl()}" type="video/mp4"/>
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                </div>
+
+                                <div th:if="${!media.getIsVideo()}" th:remove="tag">
+
+                                    <div class="post-media">
+                                        <div class="image-container" style="--aspect-ratio: 2 / 3">
+                                            <img th:src="${media.getPathUrl()}" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="post-options">
+                            <a href="">
+                                <div class="post-comments">
+                                    <img th:src="@{images/comments.png}" alt="" class="comments-img"/>
+                                    <p>35 Comments</p>
+                                </div>
+                            </a>
+
+                            <a href="">
+                                <div class="post-share">
+                                    <img th:src="@{images/share.png}" alt="" class="share-img"/>
+                                    <p>share</p>
+                                </div>
+                            </a>
+
+                            <a href="">
+                                <div class="post-save">
+                                    <img th:src="@{images/save.png}" alt="" class="save-img"/>
+                                    <p>Save</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Change Password and Email</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    .bottom-container {
+      max-width: 400px;
+      margin: 100px auto;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    .top-container{
+    max-width: 400px;
+      margin: 100px auto;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #555;
+    }
+
+    input[type="password"],
+    input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cancel-email{
+       position: relative;
+       top: -58px;
+       left: 279px;
+    }
+    .cancel-password{
+        top: -58px;
+        position: relative;
+        left: 267px;
+    }
+
+    button {
+      padding: 12px 20px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .cancel-button {
+      background-color: #ccc;
+    }
+  </style>
+</head>
+<body>
+<div class="top-container">
+  <h1>Change Password</h1>
+  <form th:action="@{/save_password}" method="POST">
+    <label for="password">New Password</label>
+    <input type="password" id="password" name="password" required>
+    <input type="hidden" name="userId" th:value="${userId}">
+    <label for="confirm-password">Confirm Password</label>
+    <input type="password" id="confirm-password" name="confirm-password" required>
+
+    <div class="button-container">
+      <button type="submit">Save</button>
+    </div>
+  </form>
+  <br>
+  <div class="cancel-password">
+  <form th:action="@{/cancel_changes}" method="get">
+    <input type="hidden" name="userId" th:value="${userId}">
+    <button type="submit" class="cancel-button">Cancel</button>
+  </form>
+  </div>
+</div>
+
+<div class="bottom-container">
+  <h1>Change Email</h1>
+  <form action="/save_email" method="POST">
+    <label for="email">New Email</label>
+    <input type="email" id="email" name="email" required>
+    <input type="hidden" name="userId" th:value="${userId}">
+    <div class="button-container">
+      <button type="submit">Save</button>
+    </div>
+  </form>
+  <br>
+  <div class="cancel-email">
+  <form th:action="@{/cancel_changes}" method="get">
+    <input type="hidden" name="userId" th:value="${userId}">
+    <button type="submit" class="cancel-button">Cancel</button>
+  </form>
+  </div>
+</div>
+</body>
+</html>

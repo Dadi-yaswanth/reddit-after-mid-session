@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .createcommunity {
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        padding: 17px 15px 53px 21px;
+        border: 1px solid;
+      }
+      .heading {
+        display: flex;
+        border-bottom: 1px solid #d19a2b;
+        justify-content: flex-start;
+      }
+      .name {
+        display: grid;
+        position: relative;
+        justify-content: flex-start;
+        top: 15px;
+      }
+      .communitynameinput {
+        position: relative;
+        top: 29px;
+      }
+      .communitynameinput input {
+        width: 550px;
+        padding-bottom: 10px;
+      }
+      .communitytypes {
+        display: grid;
+        top: 21px;
+        position: relative;
+        align-items: center;
+      }
+      .buttons {
+        display: flex;
+        justify-content: flex-end;
+        position: relative;
+        top: 45px;
+      }
+      .public .restricted .private {
+        margin: 2px;
+        display: flex;
+        align-items: center;
+        gap: 3px;
+      }
+      .restricted .private {
+        margin-top: 6px;
+      }
+      .create {
+        border: 0px;
+        width: 157px;
+        border-radius: 19px;
+        padding: 4px;
+        color: white;
+        background-color: blue;
+        font-size: 16px;
+      }
+      .cancel {
+        border-radius: 11px;
+        width: 88px;
+        color: blue;
+        height: 26px;
+        border: 1px solid blue;
+        background-color: white;
+      }
+      .error {
+          color: red;
+          font-size: 14px;
+          font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="createcommunity">
+
+    <form th:action="@{/save_community}" th:object="${community}" method="post">
+        <div class="heading">
+            <h2>Create a Community</h2>
+        </div>
+        <div class="name">
+            <span>Name</span>
+            <span>community names including capitalizatiion cannot be changed</span>
+            <span th:if="${message}" class="error">Community name already exists!</span>
+        </div>
+
+        <div class="communitynameinput">
+            <input type="text" max="21" th:field="*{communityName}" placeholder="r/" />
+        </div>
+        <div class="communitytypes">
+            <div class="tyes">
+                <h2>Community type</h2>
+            </div>
+            <div class="public">
+
+
+                <input value="th:public" name="communityType" type="radio" th:checked="${true}"/>
+                <img
+                        src="https://cdn2.iconfinder.com/data/icons/app-user-interface-6/48/User-64.png"
+                        width="20px"
+                />
+                <span
+                ><b>Public</b
+                ><em>Anyone can view, post, and comment to this community</em></span
+                >
+            </div>
+            <div class="restricted">
+                <input th:value="restricted" name="communityType" type="radio" />
+                <img
+                        src="https://cdn0.iconfinder.com/data/icons/editing-10/60/invisible__hide__no__stop__restricted-64.png"
+                        width="20px"
+                />
+                <span
+                ><b>Restricted</b
+                ><em
+                >Anyone can view this community, but only approved users can
+              post</em
+                ></span
+                >
+            </div>
+            <div class="private">
+                <input th:value="private" name="communityType" type="radio" />
+                <img
+                        src="https://cdn4.iconfinder.com/data/icons/basic-ui-2-line/32/padlock-lock-locked-private-hide-64.png"
+                        width="20px"
+                />
+                <span
+                ><b>Private</b
+                ><em
+                >Only approved users can view and submit to this community</em
+                ></span
+                >
+            </div>
+        </div>
+        <div class="buttons">
+            <input class="cancel" type="submit" value="Cancel" />
+            <input class="create" type="submit" value="Create Community" />
+        </div>
+    </form>
+</div>
+</body>
+</html>

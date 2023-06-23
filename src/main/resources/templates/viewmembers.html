@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+           button {
+              display: inline-block;
+              justify-content: space-between;
+              margin-left:800px;
+              padding: 10px 20px;
+              width:100px;
+              background-color: #eaeaea;
+              border: none;
+              border-radius: 4px;
+              color: #333333;
+              text-align: center;
+              text-decoration: none;
+              cursor: pointer;
+              transition: background-color 0.3s ease;
+              background-color: #04AA6D;
+              color: white;
+     }
+     button:hover {
+              opacity: 0.8;
+      }
+
+    .community-userinfo{
+                background-color: #f1f1f1;
+                border: 1px solid #ccc;
+                padding: 10px;
+                margin-bottom: 20px;
+}
+
+
+ </style>
+</head>
+<body>
+<div class="back-communtiy">
+    <a th:href="@{/view-community/{communityName}(communityName=${community.communityName})}"   class="btn btn-primary">
+        &#8592; Back
+    </a></div>
+    <div  class="community-userinfo" th:each="members : ${community.communityMembers}" >
+        <p th:text=" 'u/'+ ${members.username}"></p>
+
+            <span th:if="${community.communityModerators.contains(members)}">
+            <form th:action="@{/community/removeModerator}" method="get">
+                <input type="hidden" th:name="communityName" th:value="${community.communityName}" />
+                <input type="hidden" th:name="userId" th:value="${members.userId}" />
+                <button  type="submit" class="remove-moderator">Remove Moderator</button>
+            </form></span>
+
+
+            <span th:unless="${community.communityModerators.contains(members)}">
+            <form th:action="@{/community/addModerator}" method="get">
+        <input type="hidden" th:name="communityName" th:value="${community.communityName}" />
+        <input type="hidden" th:name="userId" th:value="${members.userId}" />
+        <button type="submit" class="add-moderator">Add Moderator</button>
+        </form>
+            </span>
+
+        <form th:action="@{/community/banUser}" method="get">
+            <input type="hidden" th:name="communityName" th:value="${community.communityName}" />
+            <input type="hidden" th:name="userId" th:value="${members.userId}" />
+            <button class="ban" type="submit" value="ban">Ban</button>
+        </form><br>
+    </div>
+</body>
+</html>
+

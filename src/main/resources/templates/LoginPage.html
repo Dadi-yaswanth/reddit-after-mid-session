@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    .container {
+      width: 500px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .head-text{
+    margin-left:10px;
+    font-size: 14px;
+    }
+    .google-sso{
+    padding:10px;
+     border-radius: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      width: 470px;
+    }
+    .google-sso-continue-as{
+      font-size: 12px;
+      width: 450px;
+      padding: 5px;
+       border-radius: 20px;
+       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .google-logo{
+        float:right;
+     }
+      .google-account-logo{
+       float:left;
+       }
+
+    .apple-continue-as{
+       font-size: 12px;
+       width: 450px;
+       padding: 7px;
+       border-radius: 20px;
+       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .apple-logo{
+    float:left;
+    margin:-5px;
+    margin-left:10px;
+    }
+    .apple-txt-1{
+     font-size: 15px;
+     text-align: center;
+    }
+    .container-2{
+     width: 430px;
+      margin: 35px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .username{
+      font-size: 17px;
+      margin: 10px auto;
+      border-radius: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      width: 220px;
+      padding: 10px;
+      background-color: lightgray;
+    }
+    .password{
+        font-size: 17px;
+        margin: 10px auto;
+        padding: 10px;
+        border-radius: 20px;
+       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+       width: 220px;
+       background-color: lightgray;
+    }
+    .login-button{
+      font-size: 17px;
+      background-color: lightcoral;
+      padding: 7px;
+      width: 220px;
+      border-radius: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin-left: 10px;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="head"><h2>Log In</h2></div>
+  <div class="head-text">By continuing, you are setting up a Reddit account and agree to our
+    <a target="_blank" href="https://www.redditinc.com/policies/user-agreement">User Agreement</a>
+    and<a target="_blank" href="https://www.redditinc.com/policies/privacy-policy">Privacy Policy</a>.
+  </div>
+  <br><br>
+  <div class="google-sso">
+    <div class="google-sso-continue-as">
+      <div class="google-account-logo"><img src="https://kgo.googleusercontent.com/profile_vrt_raw_bytes_1587515358_10512.png" alt="Google Logo" width="22" height="22"></div>
+      <span class="google-txt-1">&nbsp;&nbsp;Continue as rahul</span>
+      <div class="google-logo"><img src="https://kgo.googleusercontent.com/profile_vrt_raw_bytes_1587515358_10512.png" alt="Google Logo" width="25" height="25"></div>
+      <div class="google-txt-2">&nbsp;&nbsp;rahularagi108@gmail.com</div>
+    </div><br>
+    <div class="apple-continue-as">
+      <div class="apple-logo"><img src="https://d3075pyijv0bbs.cloudfront.net/marketplace_5/23a8725da047ec7ff63281d5c8cb99ea190e6549/logos/453ef18a18b23f8917b248589d66e14d3d271d20_300x300.jpg" alt="Google Logo" width="30" height="25"/></div>
+      <div class="apple-txt-1">Continue with Apple</div>
+    </div>
+  </div>
+  <br>
+  <hr>
+  <div class="container-2">
+  <form action="" th:action="@{/login}" method="post">
+
+      <input type="text" class="username" name="username" placeholder="Username" required>
+      <br>
+      <input type="password" class="password" name="password" placeholder="Password" required>
+      <br>
+    <p style="font-size: 12.5px;">Forgot your <a target="_blank" href="/">username</a> or <a target="_blank" href="/">password?</a></p>
+      <input type="submit" class="login-button" value="Log In">
+  </form>
+<!--  <button class="home" onclick="location.href='/'">Home</button>-->
+    <p style="font-size:14px;">New to Reddit? <a target="_blank" href="/newRegister">Sign Up</a></p>
+    <br>
+  </div>
+</div>
+</body>
+</html>

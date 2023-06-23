@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    body{
+    overflow-y: scroll;
+    }
+    .scroll{
+        display: flex;
+    justify-content: center;
+    align-items: center;
+       height:100%;
+    }
+    .heading{
+    height:100%;
+    }
+    .notifications{
+        border: 1px solid black;
+    width: 752px;
+    padding: 7px;
+    }
+    .div{
+      display: flex;
+    justify-content: space-between;
+    }
+    img {
+       display: flex;
+    width: 20px;
+    position: relative;
+    top: 14px;
+    right: 13px;
+
+    }
+    .nav a{
+    text-decoration: none;
+    color: black;
+    }
+    .nav{
+     top: 51px;
+    left: 23px;
+    font-size: 20px;
+    position: relative;
+    }
+    h1{
+    color:red;
+    text-align:center;
+    }
+    .nav img{
+         position: relative;
+    right: 23px;
+    top: 21px
+    }
+    </style>
+</head>
+<body>
+<div class="scroll">
+<div>
+    <div class="nav">
+        <img src="https://cdn1.iconfinder.com/data/icons/uiux-001-solid/32/Home-64.png">
+        <a th:href="@{/home}">Home</a>
+    </div>
+<div class="heading">
+    <h1>Notifications</h1>
+</div>
+<div class="notifications">
+<div class="div" th:each="notification : ${notificationMessages}">
+<p th:text="${notification.notificationMessage}"></p>
+ <a th:href="@{/delete/notification(notificationId=${notification.notificationId})}"><img src="https://cdn0.iconfinder.com/data/icons/pinpoint-notifocation/48/error-outline-64.png"> </a>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashbord</title>
+  <link rel="stylesheet" th:href="@{css/style.css}"/>
+</head>
+<body>
+<main>
+  <header id="pageHeader">
+    <div id="header-logo">
+      <a href="">
+        <img th:src="@{images/Reddit-logo.png}" alt="logo" class="header-img"/>
+      </a>
+    </div>
+    <div id="home-nav">
+      <img th:src="@{images/home.png}" alt="home" class="header-img"/>
+      <h4 class="header-text">Home</h4>
+    </div>
+    <div id="home-search">
+      <input type="search" class="search-bar" placeholder="Search Reddit"/>
+    </div>
+    <div id="header-options">
+      <a href="">
+        <img th:src="@{images/popular.png}" alt="home" class=".header-options-img"/>
+      </a>
+
+      <a href="">
+        <img th:src="@{images/notify.png}" alt="home"/>
+      </a>
+
+      <a href="">
+        <img th:src="@{images/message.png}" alt="home"/>
+      </a>
+
+      <a href="">
+        <img th:src="@{images/plus.png}" alt="home"/>
+      </a>
+    </div>
+
+    <div id="header-profile">
+      <div id="header-profile-pic">
+        <img th:src="@{images/dp.png}" alt="picture"/>
+      </div>
+
+      <div id="header-profile-details">
+        <div id="username-div">
+          <p>sham_yaswanth</p>
+        </div>
+
+        <div id="karma-div">
+          <img th:src="@{images/karma-star.png}" alt="star"/>
+          <p>100786 karma</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <article id="mainArticle">
+    <div id="community-header">
+      <div id="community-color-banner"></div>
+      <div id="community-data-banner">
+        <div id="community-data">
+          <div id="community-banner-dp">
+            <div id="dp-img-div"><img th:src="@{images/download.jpeg}" alt=""/></div>
+          </div>
+
+          <div id="community-banner-name">
+            <h1>Taarak Mehta Ka Ooltah Chashmah</h1>
+            <a href=""><p>r/TMKOC</p></a>
+          </div>
+
+          <div id="community-banner-btn">
+            <form action="" method="post">
+              <input type="submit" value="Join"/>
+            </form>
+          </div>
+          <div id="community-banner-settings">
+            <form action="" method="post">
+              <input type="submit" value="Settings"/>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="posts-main">
+      <div id="posts-div">
+        <div id="upload-div">
+          <div id="dp-input-box">
+            <a href="">
+              <img th:src="@{images/dp.png}" alt="" id="dp-input"/>
+            </a>
+          </div>
+          <div id="new-post-input">
+            <input
+                    type="text"
+                    id="post-input-box"
+                    placeholder="Create Post"
+            />
+          </div>
+          <div id="new-post-media">
+            <a href="">
+              <img th:src="@{images/image.png}" alt="image"/>
+            </a>
+            <a href="">
+              <img th:src="@{images/link.png}" alt="link"/>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <nav id="mainNav"></nav>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
