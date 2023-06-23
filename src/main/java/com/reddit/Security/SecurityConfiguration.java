@@ -30,7 +30,8 @@ public class SecurityConfiguration {
                     "/view-community/**",
                     "/view-profile",
                     "/images/**",
-                    "/uploads/**"
+                    "/uploads/**",
+                    "/media/**"
             };
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
